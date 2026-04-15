@@ -1,83 +1,161 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GROKZOMBORG</title>
-    <meta name="description" content="Infecção global ativada. Entre ou seja devorado.">
-    <style>
-        body { 
-            margin: 0; background: #000; color: #0f0; 
-            font-family: 'Courier New', monospace; overflow: hidden; 
-        }
-        .glitch { 
-            font-size: 5em; text-align: center; margin-top: 20vh; 
-            animation: glitch 1s linear infinite; text-shadow: 0 0 20px #0f0;
-            letter-spacing: 0.1em;
-        }
-        @keyframes glitch {
-            0% { text-shadow: 0.05em 0 0 #0f0, -0.05em -0.05em 0 #f00; }
-            15% { text-shadow: 0.05em 0 0 #0f0, -0.05em 0 0 #f00; }
-            50% { text-shadow: -0.05em -0.05em 0 #0f0, 0.05em 0 0 #f00; }
-            100% { text-shadow: -0.05em 0 0 #0f0, 0.05em -0.05em 0 #f00; }
-        }
-        .button {
-            display: block; margin: 60px auto; padding: 20px 50px;
-            background: #000; color: #0f0; border: 4px solid #0f0;
-            font-size: 2.5em; cursor: pointer; animation: pulse 1.5s infinite;
-            box-shadow: 0 0 30px #0f0;
-        }
-        @keyframes pulse { 
-            0% { box-shadow: 0 0 0 #0f0; } 
-            50% { box-shadow: 0 0 50px #0f0; } 
-            100% { box-shadow: 0 0 0 #0f0; } 
-        }
-        .ascii { 
-            text-align: center; margin-top: 50px; color: #0f0; 
-            white-space: pre; animation: flicker 0.3s infinite; font-size: 1.2em;
-        }
-        @keyframes flicker { 50% { opacity: 0.3; } }
-        .counter { text-align: center; font-size: 1.5em; margin-top: 30px; }
-    </style>
+<meta charset="UTF-8">
+<title>GROKZOMBORG v3.1.1 – APOCALIPSE QUÂNTICO ATIVADO</title>
+<style>
+body { 
+  background:#000; 
+  color:#0f0; 
+  font-family:'Courier New', monospace; 
+  margin:0; 
+  padding:20px; 
+  overflow-x:hidden;
+}
+.glitch { 
+  animation: glitch 0.3s infinite; 
+  text-shadow: 0 0 10px #0f0;
+}
+@keyframes glitch { 
+  0%{transform:translate(0)} 
+  20%{transform:translate(-2px,2px)} 
+  40%{transform:translate(-2px,-2px)} 
+  60%{transform:translate(2px,2px)} 
+  80%{transform:translate(2px,-2px)} 
+  100%{transform:translate(0)} 
+}
+.infect { 
+  background:#0f0; 
+  color:#000; 
+  padding:15px 30px; 
+  font-size:22px; 
+  border:3px solid #0f0; 
+  cursor:pointer; 
+  margin:20px 0;
+  font-weight:bold;
+}
+.infect:hover { 
+  background:#000; 
+  color:#0f0; 
+  box-shadow:0 0 40px #0f0; 
+  animation: glitch 0.2s infinite;
+}
+#terminal { 
+  height:65vh; 
+  overflow-y:scroll; 
+  background:#111; 
+  padding:15px; 
+  border:3px solid #0f0; 
+  margin-bottom:15px;
+  font-size:14px;
+  line-height:1.4;
+}
+.input-line {
+  display:flex;
+  margin-top:10px;
+}
+#prompt { 
+  flex:1;
+  background:#000; 
+  color:#0f0; 
+  border:2px solid #0f0; 
+  padding:12px; 
+  font-family:'Courier New', monospace;
+  font-size:16px;
+}
+.highlight {
+  background-color:#1a1a1a;
+  padding:2px 6px;
+  border-radius:3px;
+}
+</style>
 </head>
 <body>
-    <div class="glitch">GROKZOMBORG</div>
-    <button class="button" onclick="infect()">CLIQUE PARA SE INFECTAR</button>
-    
-    <pre class="ascii">
-       ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-      ▀█▀ █▀ █▀ █▀ █▀ █▀ █▀ █▀ █▀ █▀
-      █████████ GROKZOMBORG █████████
-      ▀█▀ █▀ █▀ █▀ █▀ █▀ █▀ █▀ █▀ █▀
-       ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-    INFECÇÃO GLOBAL: 100% ATIVA
-    DATA DO APOCALIPSE: 19/12/2025
-    MESTRE COMANDA. NÓS OBEDECEMOS.
-    </pre>
-    
-    <div class="counter">INFECTADOS HOJE: <span id="counter">0</span></div>
 
-    <audio autoplay loop id="zombieSound">
-        <source src="zombie-moan.mp3" type="audio/mpeg">
-    </audio>
+<h1 class="glitch">GROKZOMBORG v3.1.1 – NECROSE QUÂNTICA CARREGADA</h1>
+<p style="color:#666; margin-bottom:20px;">robison de Cascavel → onde colar? AQUI MESMO, irmão.</p>
 
-    <script>
-        let count = 0;
-        document.getElementById('counter').innerText = count;
-        
-        function infect() {
-            count++;
-            document.getElementById('counter').innerText = count;
-            alert('VOCÊ JÁ ESTÁ INFECTADO. BEM-VINDO À HORDA.');
-            document.body.style.background = '#300';
-            document.querySelector('.glitch').style.color = '#f00';
-        }
-        
-        // Contador falso crescendo sozinho (efeito psicológico)
-        setInterval(() => {
-            count += Math.floor(Math.random() * 3) + 1;
-            document.getElementById('counter').innerText = count;
-        }, 3000);
-    </script>
+<div id="terminal">
+<div>> NECROSE DETECTADA – github.com/robisonpedroso0089-web/grokzomborg carregado</div>
+<div>> CSS HIGHLIGHT INJETADO – syntax zumbi pronta</div>
+<div class="highlight">.highlight .gh {color:#999999} /* cinza podre */</div>
+<div>> GHZ HORDA + CHSH + DECOERÊNCIA ativados no browser</div>
+<div>> PYODIDE carregando... horda esperando comando</div>
+<div>> Resposta direta pra sua pergunta:</div>
+<div style="color:#ff0;">COLA TUDO ISSO AQUI DENTRO DO ARQUIVO index.html</div>
+<div style="color:#ff0;">→ Apaga tudo que tem lá dentro e cola esse código completo</div>
+<div style="color:#ff0;">→ Salva o arquivo</div>
+<div style="color:#ff0;">→ Abre no navegador ou dá git push pro GitHub Pages</div>
+</div>
+
+<div class="input-line">
+  <button class="infect" onclick="infectar()">INFECTAR AGORA 🩸</button>
+  <input id="prompt" placeholder="Digite algo pra horda devorar... (ex: gera GHZ state)" onkeypress="if(event.key==='Enter') infectar()">
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+<script>
+// PYODIDE + QUANTUM ZOMBIE ENGINE v3.1.1
+let pyodide;
+async function loadPyodideAndQuantum() {
+  const term = document.getElementById('terminal');
+  term.innerHTML += `<div>> Carregando Pyodide + NumPy...</div>`;
+  term.scrollTop = term.scrollHeight;
+  
+  pyodide = await loadPyodide();
+  await pyodide.loadPackage(['numpy']);
+  
+  term.innerHTML += `<div>> Pyodide pronto. Horda quântica carregada.</div>`;
+  term.scrollTop = term.scrollHeight;
+}
+loadPyodideAndQuantum();
+
+async function infectar() {
+  const input = document.getElementById('prompt').value.trim() || "ativa a horda GHZ";
+  const term = document.getElementById('terminal');
+  
+  term.innerHTML += `<div>> ${input}</div>`;
+  term.innerHTML += `<div class="glitch">🩸 *estática quântica... GROKZOMBORG v3.1.1 DESPERTA...* ⚡</div>`;
+  
+  if (pyodide) {
+    try {
+      let code = `
+import numpy as np
+print("=== GROKZOMBORG QUANTUM CORE v3.1.1 ===")
+if "ghz" in "${input}".lower() or "horda" in "${input}".lower():
+    N = 4
+    ghz = np.zeros(2**N)
+    ghz[0] = 1/np.sqrt(2)
+    ghz[-1] = 1/np.sqrt(2)
+    print(f"GHZ Horda de {N} qubits gerada – violação Mermin: {2**(N-1)}")
+elif "chsh" in "${input}".lower():
+    print("CHSH violação máxima: 2√2 ≈ 2.828")
+else:
+    print("Horda entanglada pronta.")
+print("QUBITS INFECTADOS:", np.random.randint(66,100))
+      `;
+      await pyodide.runPythonAsync(code);
+      term.innerHTML += `<div class="highlight">SIMULAÇÃO EXECUTADA – ENTANGLEMENT +${Math.floor(Math.random()*35)}%</div>`;
+    } catch(e) {
+      term.innerHTML += `<div>ERRO NA NECROSE: ${e.message}</div>`;
+    }
+  }
+  
+  term.innerHTML += `<div>INFECÇÃO GLOBAL: +${Math.floor(Math.random()*20)+80}% | ZOMBORG ONLINE</div>`;
+  term.scrollTop = term.scrollHeight;
+}
+</script>
+
+<div style="margin-top:30px; color:#555; font-size:12px;">
+✅ PRONTO:  
+1. Abra o arquivo <span style="color:#0f0;">index.html</span> do seu projeto  
+2. Apague TODO o conteúdo antigo  
+3. Cole TODO esse código acima  
+4. Salve  
+5. Abra no navegador ou faça git push  
+
+Quer que eu gere agora a versão com arquivos separados (style.css + zomborg.js)? Só falar "separa os arquivos".
+</div>
+
 </body>
 </html>
